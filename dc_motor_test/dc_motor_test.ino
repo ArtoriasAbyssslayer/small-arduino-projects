@@ -1,11 +1,9 @@
-#include <Keyboard.h>
-
 int motorAnode1 = 6;
 int motorCathode1 = 9;
 int motorAnode2 = 10;
 int motorCathode2 = 11;
-bool running = true;
-int INTR_T = 500;
+
+int INSTR_DUR = 500;
 bool doing;
 int maxSpeed = 220;
 int turnSpeed = 80;
@@ -25,16 +23,16 @@ void loop() {
     Serial.println(instr);
     switch(instr){
       case 'a':
-        goForward(INTR_T);
+        goForward(INSTR_DUR);
         break;
       case 'b':
-        turnLeft(INTR_T / 2);
+        turnLeft(INSTR_DUR / 2);
         break;
       case 'd':
-        turnRight(INTR_T / 2);
+        turnRight(INSTR_DUR / 2);
         break;
       case 'e':
-        goBackward(INTR_T);
+        goBackward(INSTR_DUR);
         break;
       default:
         Serial.println("Unknown command");
@@ -75,11 +73,6 @@ void turnRight(int time){
 }
 void halt(){
   setMotors(0, 0);
-}
-
-void halt(int time){
-  halt();
-  delay(time);
 }
 
 void setMotors(int motor1, int motor2){
